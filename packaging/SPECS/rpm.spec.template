@@ -11,4 +11,4 @@ LD_PRELOAD library to inject O_DIRECT into file I/O.
 rm -rf %{buildroot}
 
 %files
-/usr/lib/lib__NAME__.so
+/usr/lib64/lib__NAME__.so

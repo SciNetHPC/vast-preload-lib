@@ -145,8 +145,11 @@ prepare-buildroot: | all clean-packaging
 	# copy main lib
 	cp --preserve $(LIB) $(PACKAGING_PATH)/BUILDROOT/$(PKG_INST_PATH)
 
-rpm: | prepare-buildroot
+rpm: | all clean-packaging
 	@echo "[PACKAGING] PREPARE RPM PACKAGE"
+
+	mkdir -p $(PACKAGING_PATH)/BUILDROOT/usr/lib64
+	cp --preserve $(LIB) $(PACKAGING_PATH)/BUILDROOT/usr/lib64
 
 	cp $(PACKAGING_PATH)/SPECS/rpm.spec.template $(PACKAGING_PATH)/SPECS/rpm.spec
 	sed -i "s/__NAME__/$(LIB_NAME)/" $(PACKAGING_PATH)/SPECS/rpm.spec
