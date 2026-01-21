@@ -100,13 +100,13 @@ Building the VAST LD_PRELOAD Library requires a C++14 compatible compiler, such 
 ### Dependencies for Debian/Ubuntu
 
 ```bash
-sudo apt install build-essential debhelper devscripts fakeroot git libboost-filesystem-dev lintian
+sudo apt install build-essential debhelper devscripts fakeroot git lintian
 ```
 
 ### Dependencies for RHEL/CentOS
 
 ```bash
-sudo yum install boost-devel gcc-c++ git make rpm-build
+sudo yum install gcc-c++ git make rpm-build
 ```
 
 #### On RHEL / CentOS 7.x: Prepare Environment with newer gcc Version

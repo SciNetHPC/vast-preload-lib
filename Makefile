@@ -21,24 +21,21 @@ CC                 ?= gcc
 CXX                ?= g++
 STRIP              ?= strip
 
-CXXFLAGS_BOOST     ?= -DBOOST_SPIRIT_THREADSAFE -DBOOST_FILESYSTEM_VERSION=3
-LDFLAGS_BOOST      ?= -lboost_filesystem
-
-CCFLAGS_COMMON   = -DLIB_NAME=\"$(LIB_NAME)\" -DLIB_VERSION=\"$(LIB_VERSION)\" $(CXXFLAGS_BOOST) \
+CCFLAGS_COMMON   = -DLIB_NAME=\"$(LIB_NAME)\" -DLIB_VERSION=\"$(LIB_VERSION)\" \
 	-D_GNU_SOURCE -I $(SOURCE_PATH) \
 	-Wunused-variable -Wextra -Wno-unused-parameter -fmessage-length=0 \
 	-fno-strict-aliasing -pthread -ggdb -fPIC
 CCFLAGS_RELEASE  = -O3 -Wuninitialized
 CCFLAGS_DEBUG    = -O0 -D_FORTIFY_SOURCE=2 -DBUILD_DEBUG
 
-CXXFLAGS_COMMON  = -DLIB_NAME=\"$(LIB_NAME)\" -DLIB_VERSION=\"$(LIB_VERSION)\" $(CXXFLAGS_BOOST) \
+CXXFLAGS_COMMON  = -DLIB_NAME=\"$(LIB_NAME)\" -DLIB_VERSION=\"$(LIB_VERSION)\" \
 	-D_GNU_SOURCE -I $(SOURCE_PATH) \
 	-Wunused-variable -Woverloaded-virtual -Wextra -Wno-unused-parameter -fmessage-length=0 \
-	-fno-strict-aliasing -pthread -ggdb -std=c++14 -fPIC
+	-fno-strict-aliasing -pthread -ggdb -std=c++17 -fPIC
 CXXFLAGS_RELEASE = -O3 -Wuninitialized
 CXXFLAGS_DEBUG   = -O0 -D_FORTIFY_SOURCE=2 -DBUILD_DEBUG
 
-LDFLAGS_COMMON   = -shared -fPIC -rdynamic -pthread -ldl $(LDFLAGS_BOOST)
+LDFLAGS_COMMON   = -shared -fPIC -rdynamic -pthread -ldl
 LDFLAGS_RELASE   = -O3
 LDFLAGS_DEBUG    = -O0
 

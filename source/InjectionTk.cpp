@@ -1,4 +1,4 @@
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include <fcntl.h>
 #include "InjectionTk.h"
 
@@ -30,18 +30,14 @@ void InjectionTk::injectAfterOpen(int fd, std::string path, int flags)
 
 	if(!(libOpts & ENV_LIB_OPT_RAWPATHS) )
 	{ // normalize path (e.g. remove ".." and "//")
-		boost::filesystem::path pathObj(path);
+		std::filesystem::path pathObj(path);
 
 		std::string pathObjNormalizedStr = pathObj.lexically_normal().string();
 
-		// .normalize() leaves a trailing slashdot ("/.") when path ended with "/", so remove that
-		/* note: trailing slashdot is due to BOOST_FILESYSTEM_VERSION=3 def in Makefile. if this
-		 * ever gets changed to BOOST_FILESYSTEM_VERSION >3 or to C++17 std::filesystem then the
-		 * trailing slash remains but the trailing dot goes away. */
-		if( (pathObjNormalizedStr.length() > 2) &&
-			('/' == pathObjNormalizedStr[pathObjNormalizedStr.length() -2] ) &&
-			('.' == pathObjNormalizedStr[pathObjNormalizedStr.length() -1] ) )
-			pathObjNormalizedStr.resize(pathObjNormalizedStr.length() -2);
+		// .lexically_normal() leaves a trailing slash when path ends with a "/", so remove that
+		if( (pathObjNormalizedStr.length() > 1) &&
+			('/' == pathObjNormalizedStr[pathObjNormalizedStr.length() -1] ) )
+			pathObjNormalizedStr.resize(pathObjNormalizedStr.length() -1);
 
 		if( (libLogTopics & ENV_LOG_TOPIC_NORMALIZE) && (pathObj.string() != path) )
 			log_fprintf(stderr, LOG_PREFIX "Normalized path. fd: %d; old: %s; new: %s\n",

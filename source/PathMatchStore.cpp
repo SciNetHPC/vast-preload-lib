@@ -23,7 +23,9 @@ bool PathMatchStore::loadPathFile(std::string path)
 	// process each line in input file
 	for( ; std::getline(fileStream, lineStr); lineNum++)
 	{
-		boost::trim(lineStr);
+		// trim whitespace
+		lineStr = std::regex_replace(lineStr, std::regex("^\\s+"), "");
+		lineStr = std::regex_replace(lineStr, std::regex("\\s+$"), "");
 
 		if(lineStr.empty() )
 			continue; // nothing to do for empty lines

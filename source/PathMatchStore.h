@@ -1,7 +1,6 @@
 #ifndef PATHMATCHSTORE_H_
 #define PATHMATCHSTORE_H_
 
-#include <boost/algorithm/string.hpp>
 #include <fstream>
 #include <mutex>
 #include <regex>
