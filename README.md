@@ -103,24 +103,11 @@ Building the VAST LD_PRELOAD Library requires a C++14 compatible compiler, such 
 sudo apt install build-essential debhelper devscripts fakeroot git lintian
 ```
 
-### Dependencies for RHEL/CentOS
+### Dependencies for RHEL & derivatives
 
 ```bash
 sudo yum install gcc-c++ git make rpm-build
 ```
-
-#### On RHEL / CentOS 7.x: Prepare Environment with newer gcc Version
-
-Skip these steps on RHEL / CentOS 8.0 or newer.
-
-```bash
-sudo yum install centos-release-scl # for CentOS
-# ...or alternatively for RHEL: yum-config-manager --enable rhel-server-rhscl-7-rpms
-sudo yum install devtoolset-8
-scl enable devtoolset-8 bash # alternatively: source /opt/rh/devtoolset-8/enable
-```
-
-The `scl enable` command enters a shell in which the environment variables are pointing to a newer gcc version. (The standard gcc version of the system remains unchanged.) Use this shell to run `make` later. The resulting executable can run outside of this shell.
 
 ## Build & Install
 
